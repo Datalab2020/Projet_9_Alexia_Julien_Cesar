@@ -1,0 +1,59 @@
+poty mongoDB : 27017
+client : mongo
+ 
+connection datalab : mysql -h datalab-mame.myconnectech.fr -u jgarcia -p
+ 
+ 
+tunel : mongo
+---local----
+ssh -X -L27017:localhost:27017 jgarcia@datalab-mame.myconnectech.fr
+
+
+ssh -X -L5432:localhost:5432 -L27017:localhost:27017 jgarcia@datalab.myconnectech.fr
+
+
+
+----Connexion mongo db-----
+mongo -u jgarcia -p --authenticationDatabase 'admin'
+------------------------------------------------------------------
+
+Une fois connecter nous pouvons créer une notre base de données
+
+Table/collections
+ligne/document
+
+
+Create Une Bdd Temporaire:-------
+use bdd_garcia / 
+
+Inserer Des Données Dans La Base De Données:-------
+bd.demo.insert({"Name":"test","n":100})
+
+Pour Afficher Les Elements De Notre Bdd:----------
+db.demo.find()
+
+------------------------------------------------------------------
+connaitre le nombre dmongodb://identifian:motdepass@127.0.0.1:27017/admin?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=falsee documents dans une collections
+db.groupe2.find().count()
+
+affiche de façon plus propre utiliser : pretty()
+db.groupe2.find().pretty()
+
+
+
+id com : ce953728a12d1ebe20c60239f1900d3e89dce41d
+
+
+id : 60085107e47b4a0001000799
+
+
+https://www.fun-mooc.fr/courses/course-v1:ulb+44013+session04/discussion/forum/631e445a4deea7be7f20f25883e5d21bb2eb1afd/threads/6008e653d74ccf0001005d97
+
+
+Tunnel
+ssh -X -L5432:localhost:5432 -L3306:localhost:3306 jgarcia@datalab.myconnectech.fr
+
+MONGO
+mongodb://jgarcia:Z%26ybp%3Ai-JS%3A5~@127.0.0.1:27017/admin?authSource=admin
+
+
