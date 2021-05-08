@@ -11,6 +11,13 @@ Created on Tue May  4 10:38:55 2021
 import yaml, requests, pprint
 import pymongo
 from pymongo import MongoClient
+from datetime import datetime
+
+print("#################################################")
+print("#################################################")
+print()
+print(f"{datetime.now()} (Date d'importation des données)")
+print()
 
 confAll = yaml.safe_load(open('/home/formateur/uno/projet_9/config.yml', 'r'))
 #print(confAll)
@@ -30,45 +37,58 @@ str = 'mongodb://%s:%s@%s/?authSource=%s' % (conf['user'], conf['password'], con
 #print("mongo conn:", str)
 client = MongoClient(str)
 db = client['bdd_projet9_ajc']
-collec = db['Jobs_data_region_Paris_centre']
+collec = db['Jobs_data_regions_Centre_et_Ile_de_France']
 # collec.save({"pole_emploi_1": "test"})
 
 conf = confAll['pole_emploi']
-print('conf:', conf)
+#print('conf:', conf)
 
 # On renseigne les variables utilisées pour la requète POST
-URL = 'https://entreprise.pole-emploi.fr/connexion/oauth2/access_token'
+URL_token = 'https://entreprise.pole-emploi.fr/connexion/oauth2/access_token'
 app = 'api_offresdemploiv2 o2dsoffre'
 scope="application_"+conf['PAR']+" "+app
-print('scope: ', scope)
+#print('scope: ', scope)
 
-params={"realm":"/partenaire"}
+params_token={"realm":"/partenaire"}
 post_data = {"grant_type": "client_credentials",
         "client_id": conf['PAR'],
         "client_secret": conf['SEC'],
         "scope": scope}
-headers = {"content-type": "application/x-www-form-urlencoded"}
+headers_token = {"content-type": "application/x-www-form-urlencoded"}
 
 # Execution de la requète
-req = requests.post(URL, params=params, data=post_data, headers=headers)
-resp = req.json()
-pprint.pprint(resp)
+req_token = requests.post(URL_token, params=params_token, data=post_data, headers=headers_token)
+resp_token = req_token.json()
+#pprint.pprint(resp)
+status = req_token.status_code
+print(f"Génération de token, status = {status}")
+print()
+
 # Le token !!!
-token = resp['access_token']
-print("access token: ", token)
+token = resp_token['access_token']
+#print("access token: ", token)
 
 print("-------------------------------------------------")
 
-for region in option_region:
+ 
 
-    for mot_cle in options_mot_cle:
+
+for region in option_region:            # effectue tout le processus qui suit pour chacune des options de la liste option_region
+    
+    if region == 11:
+        nom_region = "Île-de-France"
+    elif region == 24:
+        nom_region = "Centre-Val de Loire"
+        
+        
+    for mot_cle in options_mot_cle:     # effectue tout le processus qui suit pour chacune des options de la liste options_mot_cle
         #print(mot_cle)
         i = 0
         debut = 0
         fin = 100
         nom_result = 100
-        while nom_result >= 100:
-            print(f"de {debut} à {fin} option {mot_cle}")
+        while nom_result >= 100:        # cette boucle while permet rechercher tous les résultats en les retournant par groupes de 100
+            print(f"{debut} - {fin} / option: {mot_cle}, région: {nom_region}")
             print()
             URL = 'https://api.emploi-store.fr/partenaire/offresdemploi/v2/offres/search'
             params={"motsCles":mot_cle, "region":region, "range":f"{debut}-{fin}", "sort":1}
@@ -76,20 +96,20 @@ for region in option_region:
             
             req = requests.get(URL, params=params, headers=headers)
             resp = req.json()
-            try:            
-                resp_bucle = resp['resultats'] # Avec cette instruction, cette partie est terminée si en raison de la boucle, de mauvais paramètres sont entrés (lorsqu'il n'y a plus de résultats à afficher)
-            except:
+            try:                                    # teste s'il y a une erreur
+                resp_bucle = resp['resultats'] 
+            except:                                  # avec cette instruction, cette partie est terminée si en raison de la boucle, de mauvais paramètres sont entrés (le nombre à l'entrée ne peut excéder mille)
                 pprint.pprint(resp)
-                print("-------------------------------------------------")
                 print()
-                break
+                print("-------------------------------------------------")                
+                break                              
             else:              
                   
                 for resultats in resp_bucle:
-                    try:
+                    try:                            # teste s'il y a une erreur
                         collec.save(resultats)
                         
-                    except pymongo.errors.DuplicateKeyError:
+                    except pymongo.errors.DuplicateKeyError:                        # s'il y a une erreur d'insertion due à l'index unique, le programme ignore cette entrée
                         #print(f"Region {region} - {mot_cle} déjà dans la bdd")
                         continue
                     
@@ -102,7 +122,7 @@ for region in option_region:
                 print("-------------------------------------------------")
                 i += 1
                 debut = i*100
-                fin = i*100 + 102
+                fin = i*100 + 105
     
     
     
