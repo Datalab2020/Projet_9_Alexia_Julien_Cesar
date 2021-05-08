@@ -71,8 +71,6 @@ token = resp_token['access_token']
 print("-------------------------------------------------")
 
  
-
-
 for region in option_region:            # effectue tout le processus qui suit pour chacune des options de la liste option_region
     
     if region == 11:
