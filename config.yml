@@ -1,9 +1,14 @@
 mongo:
-  user: '--------'
-  password: '------------'
+  user: 'cparra'
+  password: 'i.}4rF-e(-mUE'
   host: '127.0.0.1'
   authSource: 'admin'
-
+  
 pole_emploi:
-  PAR: 'PAR_cesardev2021_.....'
-  SEC: 'fb7fef65978352597ce......'
+  PAR: 'PAR_cesardev2021_7570bdecc86adbfb87d5951cf180d2ec847284a4ab9f25815555457a4727d7c7'
+  SEC: 'fb7fef65978352597ce4a9cb483b4839b0235ce9dfbbd06d5b48148055da742d'
+    
+postgres:
+  user: 'cparra'
+  password: 'i.}4rF-e(-mUE'
+  host: '127.0.0.1'
