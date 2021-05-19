@@ -1,0 +1,57 @@
+CREATE TABLE public."projet_Job_IO_ajc_2"
+(
+    id character varying(7) COLLATE pg_catalog."default" NOT NULL,
+    intitule character varying(300) COLLATE pg_catalog."default",
+    description character varying(5000) COLLATE pg_catalog."default",
+    dateCreation date,
+    dateActualisation date,
+    lieuTravail_libelle character varying COLLATE pg_catalog."default",
+    Insee_departement integer,
+    Département character varying COLLATE pg_catalog."default",
+    Insee_region integer,
+    Région character varying COLLATE pg_catalog."default",
+    lieuTravail_latitude numeric,
+    lieuTravail_longitude numeric,
+    lieuTravail_codePostal integer,
+    romeCode character varying(5) COLLATE pg_catalog."default",
+    romeLibelle character varying COLLATE pg_catalog."default",
+    appellationlibelle character varying COLLATE pg_catalog."default",
+    entreprise_nom character varying COLLATE pg_catalog."default",
+    typeContrat character varying COLLATE pg_catalog."default",
+    typeContratLibelle character varying COLLATE pg_catalog."default",
+    natureContrat character varying COLLATE pg_catalog."default",
+    experienceExige character varying(1) COLLATE pg_catalog."default",
+    experienceLibelle character varying COLLATE pg_catalog."default",
+    salaire_libelle character varying COLLATE pg_catalog."default",
+    SalaireAnnuel1 numeric(6),
+    SalaireAnnuel2 numeric(6),
+    SalaireMensuel1 numeric(4),
+    SalaireMensuel2 numeric(4),
+    SalaireHoraire1 numeric(4),
+    SalaireHoraire2 numeric(4),
+    dureeTravailLibelleConverti character varying COLLATE pg_catalog."default",
+    alternance boolean,
+    nombrePostes integer,
+    accessibleTH boolean,
+    origineOffre_origine integer,
+    origineOffre_urlOrigine character varying COLLATE pg_catalog."default",
+    CONSTRAINT id_jobs_2 PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public."projet_Job_IO_ajc_2"
+    OWNER to cparra;
+
+GRANT ALL ON TABLE public."projet_Job_IO_ajc_2" TO adeboynes;
+
+GRANT ALL ON TABLE public."projet_Job_IO_ajc_2" TO cparra;
+
+GRANT ALL ON TABLE public."projet_Job_IO_ajc_2" TO goudot;
+
+GRANT ALL ON TABLE public."projet_Job_IO_ajc_2" TO jgarcia;
+
+COMMENT ON TABLE public."projet_Job_IO_ajc_2"
+    IS 'Projet 9 Job.IO';
