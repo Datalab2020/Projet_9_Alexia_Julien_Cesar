@@ -1,5 +1,7 @@
 # Projet Job.io 
 
+Application de recherche d'emplois liés a la Data, dans la région Centre-Val de Loire et Île-de-France
+
 réalisé par:
 
 Alexia de Boynes
