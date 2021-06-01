@@ -1,6 +1,9 @@
 # Projet Job.io réalisé par:
+
 Alexia de Boynes
+
 Julien Garcia
+
 César Para
 
 Vous pouvez accéder au tableau de bord via le lien suivant:
