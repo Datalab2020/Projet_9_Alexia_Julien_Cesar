@@ -1,9 +1,0 @@
-mongo:
-  user: '--------'
-  password: '------------'
-  host: '127.0.0.1'
-  authSource: 'admin'
-
-pole_emploi:
-  PAR: 'PAR_cesardev2021_.....'
-  SEC: 'fb7fef65978352597ce......'
