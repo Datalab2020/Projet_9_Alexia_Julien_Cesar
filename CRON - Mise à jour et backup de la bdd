@@ -1,0 +1,4 @@
+# m h  dom mon dow   command
+
+30 8 * * * /usr/bin/python3 /home/cparra/uno/import_donnees_dans_PostgreSQL_grp9_ajc_4_serveur.py > /home/cparra/uno/import_PostgreSQL_grp9_ajc_2.log
+40 8 * * * pg_dump -h 127.0.0.1 -U cparra bdd_projet9_ajc | gzip  > ~/uno/backup_bdd_projet9_ajc_postgres.sql.gz
